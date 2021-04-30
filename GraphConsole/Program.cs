@@ -18,6 +18,8 @@ namespace GraphConsole
         }
         static void BoxTest()
         {
+            Console.WriteLine("Box Test");
+
             // need to create a list of points and how these are linked to lines
             /*
              * v1  v2 
@@ -50,6 +52,8 @@ namespace GraphConsole
 
         static void DisconnectedTest()
         {
+            Console.WriteLine("Disconnected Test");
+
             // need to create a list of points and how these are linked to lines
             /*
              * v1  v2 
@@ -92,6 +96,8 @@ namespace GraphConsole
 
         static void ConnectedTest()
         {
+            Console.WriteLine("Connected Test");
+
             // need to create a list of verticies and linked to the edges
             /*
              *    v1  v2 
@@ -144,6 +150,8 @@ namespace GraphConsole
 
         static void EulerPathTest()
         {
+            Console.WriteLine("Euler Path Test");
+
             // need to create a list of verticies and linked to the edges
             /*
              *    v1  v2 
@@ -178,8 +186,8 @@ namespace GraphConsole
             {
                 Console.WriteLine("Euler Path");
                 Vertex<int> rv = g.FindRoot(g.Vertices);
-                Console.WriteLine("Root=" + rv.Data);
-                List<Vertex<int>> e = g.GetEuler1(g.Vertices, rv);
+                Console.WriteLine("Start=" + rv.Data);
+                List<Vertex<int>> e = g.GetEuler(g.Vertices, rv);
 
                 foreach (Vertex<int> v in e)
                 {
@@ -199,6 +207,8 @@ namespace GraphConsole
 
         static void EulerCircuitTest()
         {
+            Console.WriteLine("Euler Circuit Test");
+
             // need to create a list of verticies and linked to the edges
             /*
              *    v1  v2 
@@ -232,20 +242,26 @@ namespace GraphConsole
             {
                 Console.WriteLine("Euler Path");
                 Vertex<int> rv = g.FindRoot(g.Vertices);
-                Console.WriteLine("Root=" + rv.Data);
-                List<Vertex<int>> e = g.GetEuler1(g.Vertices, rv);
+                Console.WriteLine("Start=" + rv.Data);
+                List<Vertex<int>> e = g.GetEuler(g.Vertices, rv);
 
                 foreach (Vertex<int> v in e)
                 {
-                    Console.WriteLine(v.Data);
+                    Console.WriteLine("Vertex=" + v.Data);
                 }
             }
             else if (euler == 2)
             {
                 Console.WriteLine("Euler Circuit");
-                Vertex<int> rv = g.Vertices.; // Any vertex
-                Console.WriteLine("Root=" + rv.Data);
-                List<Vertex<int>> e = g.GetEuler1(g.Vertices, rv);
+                Vertex<int> rv = g.Vertices[0]; // Any vertex
+                Console.WriteLine("Start=" + rv.Data);
+                List<Vertex<int>> e = g.GetEuler(g.Vertices, rv);
+
+                foreach (Vertex<int> v in e)
+                {
+                    Console.WriteLine("Vertex=" + v.Data);
+                }
+
             }
             else
             {
@@ -255,6 +271,8 @@ namespace GraphConsole
 
         static void EulerTest()
         {
+            Console.WriteLine("Euler Test");
+
             // need to create a list of verticies and linked to the edges
             /*
              *       v1  v2 
@@ -284,10 +302,10 @@ namespace GraphConsole
             {
                 Console.WriteLine("Euler Path");
                 Vertex<int> rv = g.FindRoot(g.Vertices);
-                rv = v2; // Force this to match page
+                rv = v2; // Force this to match sample page from internet
 
-                Console.WriteLine("Root=" + rv.Data);
-                List<Vertex<int>> e = g.GetEuler1(g.Vertices, rv);
+                Console.WriteLine("Start=" + rv.Data);
+                List<Vertex<int>> e = g.GetEuler(g.Vertices, rv);
 
                 foreach (Vertex<int> v in e)
                 {

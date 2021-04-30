@@ -10,14 +10,14 @@ namespace GraphLibrary
         #region Fields
         
         List<Edge<TVertex>> _edges;
-        HashSet<Vertex<TVertex>> _vertices;
+        List<Vertex<TVertex>> _vertices;
         
         #endregion
         #region Constructors
         public Graph()
         {
             _edges = new List<Edge<TVertex>>();
-            _vertices = new HashSet<Vertex<TVertex>>();
+            _vertices = new List<Vertex<TVertex>>();
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace GraphLibrary
             }
         }
 
-        public HashSet<Vertex<TVertex>> Vertices
+        public List<Vertex<TVertex>> Vertices
         {
             get
             {
@@ -141,7 +141,7 @@ namespace GraphLibrary
         /// 1 --> If graph has an Euler path(Semi-Eulerian)
         /// 2 --> If graph has an Euler Circuit(Eulerian)
         /// </returns>
-        public int IsEulerian(HashSet<Vertex<TVertex>> vertices)
+        public int IsEulerian(List<Vertex<TVertex>> vertices)
         {
             // Count vertices with odd degree
             int odd = 0;
@@ -175,7 +175,7 @@ namespace GraphLibrary
 
         //findRoot() will return 0 if euler path/circuit not possible
         //otherwise it will return array index of any node as root
-        public Vertex<TVertex> FindRoot(HashSet<Vertex<TVertex>> subGraph)
+        public Vertex<TVertex> FindRoot(List<Vertex<TVertex>> subGraph)
         {
             Vertex<TVertex> root = null;
             int count = 0;
@@ -223,61 +223,62 @@ namespace GraphLibrary
         /// 
         /// </summary>
         /// <param name="subGraph"></param>
-        /// <param name="root"></param>
+        /// <param name="start"></param>
         /// <returns></returns>
-        public List<Vertex<TVertex>> GetEuler1(HashSet<Vertex<TVertex>> subGraph, Vertex<TVertex> root)
+        public List<Vertex<TVertex>> GetEuler(List<Vertex<TVertex>> subGraph, Vertex<TVertex> start)
         {
-            //To find the Euler circuit/path and store it in finalPath arrayList
+            //To find the Euler circuit/path and store it in euler List<>
 
             List<Vertex<TVertex>> euler = new List<Vertex<TVertex>>();
-            Stack<Vertex<TVertex>> tempPath = new Stack<Vertex<TVertex>>();
+            Stack<Vertex<TVertex>> stack = new Stack<Vertex<TVertex>>();
             Vertex<TVertex> current;
 
-            //push root into the stack
-            tempPath.Push(root);
-            Console.WriteLine("Intial Push " + root.Data);
-            while (tempPath.Count != 0) //until Stack going to empty
+            // Push start into the stack
+            stack.Push(start);
+            //Console.WriteLine("Intial Push " + start.Data);
+            while (stack.Count != 0) // Keep checking while the stack is not empty
             {
-                //get item top of the stack
-                current = tempPath.Peek();
-                Console.WriteLine("Peek " + current.Data);
+                // Get item from the top of the stack
+                current = stack.Peek();
+                //Console.WriteLine("Peek " + current.Data);
                 if (AllVisited(current))
                 {
-                    //If all adjacent nodes are already visited
-                    //pop element from stack and store it in finalpath arrayList
-                    Console.WriteLine("Pop " + tempPath.Peek().Data);
-                    euler.Add(tempPath.Pop());
+                    // If all adjacent edges are already visited
+                    // pop the verticie from stack and add it in the list
+
+                    //Console.WriteLine("Pop " + stack.Peek().Data);
+                    euler.Add(stack.Pop());
                 }
                 else
                 {
-                    //If any unvisited node available push that node into stack
-                    //mark that edge as already visited by marking 'n' in GraphMatrix[][]
-                    //break the iteration
+                    // If there are any unvisited edges available then push
+                    // the end verticie onto the stack.
+                    // Mark that edge as visited
+                    // break the iteration
 
                     foreach(Edge<TVertex> edge in current.Edges)
                     {
-                        Console.WriteLine("Edge=" + edge.From.Data + " to " + edge.To.Data);
+                        //Console.WriteLine("Edge=" + edge.From.Data + " to " + edge.To.Data);
                         if (edge.Visited == false)
                         {
-                            Console.WriteLine("Remove Edge " + edge.From.Data + " to " + edge.To.Data);
+                            //Console.WriteLine("Remove Edge " + edge.From.Data + " to " + edge.To.Data);
                             edge.Visited = true;
                             if (edge.From == current)
                             {
-                                Console.WriteLine("push " + edge.To.Data);
-                                tempPath.Push(edge.To);
+                                //Console.WriteLine("push " + edge.To.Data);
+                                stack.Push(edge.To);
                                 break;
                             }
                             else
                             {
-                                Console.WriteLine("push " + edge.From.Data);
-                                tempPath.Push(edge.From);
+                                //Console.WriteLine("push " + edge.From.Data);
+                                stack.Push(edge.From);
                                 break;
                             }
                         }
                     }
                 }
             }
-
             return (euler);
         }
 
