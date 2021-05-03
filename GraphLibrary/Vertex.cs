@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace GraphLibrary
 {
-    public class Vertex<TVertex> : IVertex<TVertex>
+    public class Vertex<TVertex> : IVertex<TVertex>, IComparable<Vertex<TVertex>>
     {
         #region Fields
 
         private bool _visited = false;
-        private TVertex _vertex;
+        private TVertex _data = default(TVertex);
         private List<Edge<TVertex>> _edges;
 
         #endregion
         #region Constructor
 
-        public Vertex(TVertex vertex)
+        public Vertex(TVertex data)
         {
-            _vertex = vertex;
+            _data = data;
             _edges = new List<Edge<TVertex>>();
         }
 
@@ -27,11 +29,11 @@ namespace GraphLibrary
         {
             set
             {
-                _vertex = value;
+                _data = value;
             }
             get
             {
-                return (_vertex);
+                return (_data);
             }
         }
 
@@ -63,12 +65,44 @@ namespace GraphLibrary
             }
         }
 
+        public int Compare([AllowNull] Vertex<TVertex> x, [AllowNull] Vertex<TVertex> y)
+        {
+            IComparable obj1 = (IComparable)x.Data;
+            IComparable obj2 = (IComparable)y.Data;
+            return (obj1.CompareTo(obj2));
+        }
+
         #endregion
         #region Methods
 
         public void AddEdge(Edge<TVertex> edge)
         {
             _edges.Add(edge);
+        }
+
+        public override bool Equals(object obj)
+        {
+            TVertex vertex = (TVertex)obj;
+            if (_data.Equals(vertex) != true)
+            {
+                return (false);
+            }
+            else
+            {
+                return (true);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_data);
+        }
+
+        public int CompareTo([AllowNull] Vertex<TVertex> other)
+        {
+            IComparable obj1 = (IComparable)this.Data;
+            IComparable obj2 = (IComparable)other.Data;
+            return (obj1.CompareTo(obj2));
         }
 
         #endregion
