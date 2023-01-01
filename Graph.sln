@@ -5,7 +5,16 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphLibrary", "GraphLibrary\GraphLibrary.csproj", "{13B2E848-7783-4C93-9A5F-6E9C747E56CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphConsole", "GraphConsole\GraphConsole.csproj", "{08BB5037-73AA-4951-856F-B03ABE8A8E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphTerminal", "GraphConsole\GraphTerminal.csproj", "{08BB5037-73AA-4951-856F-B03ABE8A8E06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", "{CB22B730-FD3F-4012-A6A7-CED70DB243E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TracerLibrary", "TracerLibrary", "{A94180D6-4C3C-4027-A698-494113FFC2B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net452", "net452", "{BFB448D7-43C6-45E9-9221-C50BFEFA356E}"
+	ProjectSection(SolutionItems) = preProject
+		ThirdParty\TracerLibrary\net452\TracerLibrary.dll = ThirdParty\TracerLibrary\net452\TracerLibrary.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +33,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A94180D6-4C3C-4027-A698-494113FFC2B7} = {CB22B730-FD3F-4012-A6A7-CED70DB243E0}
+		{BFB448D7-43C6-45E9-9221-C50BFEFA356E} = {A94180D6-4C3C-4027-A698-494113FFC2B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD288A04-2B05-4FD4-98B0-0481965065ED}

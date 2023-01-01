@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using GraphLibrary;
 
-namespace GraphConsole
+namespace GraphTerminal
 {
     class Program
     {
@@ -121,6 +121,7 @@ namespace GraphConsole
 
             // need to create a list of verticies and linked to the edges
             /*
+             * 
              *    v1  v2 
              *    +---+ 
              *    |   |

@@ -155,7 +155,9 @@ namespace GraphLibrary
         /// which verticies are connected in the graph.
         /// </summary>
         /// <param name="vertex"></param>
-        /// <returns></returns>
+        /// <returns>
+        ///   List of verticies that are connected
+        /// </returns>
         public List<Vertex<TVertex>> GetConnected(Vertex<TVertex> vertex)
         {
             // Search through the verticies to determine 
@@ -175,7 +177,9 @@ namespace GraphLibrary
         /// </summary>
         /// <param name="subgraph"></param>
         /// <param name="vertex"></param>
-        /// <returns></returns>
+        /// <returns>
+        ///   List of verticies that are connected
+        /// </returns>
         public List<Vertex<TVertex>> GetConnected(List<Vertex<TVertex>> subgraph, Vertex<TVertex> vertex)
         {
             // Search through the verticies to determine 
@@ -230,15 +234,15 @@ namespace GraphLibrary
         //Condition 3: If more than 2 nodes or exactly one node have odd degree, 
         //euler path/circuit not possible.
 
-        //findRoot() will return 0 if euler path/circuit not possible
-        //otherwise it will return array index of any node as root
-
 
         /// <summary>
-        /// Finds the 
+        /// Finds the start of a Euler circuit or path
         /// </summary>
         /// <param name="subgraph"></param>
-        /// <returns></returns>
+        /// <returns>
+        ///   findStart() will return null if euler path/circuit not possible
+        ///   otherwise it will return array index of any node as root
+        /// </returns>
         public Vertex<TVertex> FindStart(List<Vertex<TVertex>> subgraph)
         {
             Vertex<TVertex> root = null;
@@ -268,7 +272,10 @@ namespace GraphLibrary
         /// Check if all adjacent verticies are visited
         /// </summary>
         /// <param name="vertex"></param>
-        /// <returns></returns>
+        /// <returns>
+        ///   True --> visited
+        ///   False --> not vistied
+        /// </returns>
         private bool AllVisited(Vertex<TVertex> vertex)
         {
             bool visited = true;
@@ -284,11 +291,13 @@ namespace GraphLibrary
         }
 
         /// <summary>
-        /// 
+        /// Find the Euler circuit/path
         /// </summary>
         /// <param name="subgraph"></param>
         /// <param name="start"></param>
-        /// <returns></returns>
+        /// <returns>
+        ///   List of verties in the euler circut/path or emply list
+        /// </returns>
         public List<Vertex<TVertex>> GetEuler(Vertex<TVertex> start)
         {
             //To find the Euler circuit/path and store it in euler List<>
@@ -340,9 +349,9 @@ namespace GraphLibrary
         }
 
         /// <summary>
-        /// Flags the verties that are connected
+        /// Flags the verticies that are connected
         /// </summary>
-        public void ConnectedComponents()
+        public void SetConnected()
         {
             // Search through the verticies to determine 
             // which verticies are connected - Depth first search
